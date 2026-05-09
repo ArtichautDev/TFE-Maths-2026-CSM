@@ -29,7 +29,7 @@ sncb-delay-prediction/
 ├── data/              # Scalers, mappings catégoriels, aperçu du schéma
 └── visuals/           # Figures clés
 ```
-
+NB: certains fichiers trop volumineux pour GitHub, sont disponible via ce lien: https://drive.google.com/drive/folders/1Ic6Da4fEBng5jSu1m4VJykt6hsUaMb6i?usp=share_link
 ---
 
 ## Pipeline complet
