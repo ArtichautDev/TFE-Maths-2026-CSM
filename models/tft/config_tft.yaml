@@ -1,0 +1,154 @@
+seed: 42
+
+paths:
+  train_parquet: /workspace/data/train.parquet
+  val_parquet: /workspace/data/val.parquet
+  output_dir: /workspace/nixtla/runs/tft_v4_3day_36m
+
+data:
+  freq: 1
+  max_train_rows: 45000000
+  max_val_rows: 1500000
+  read_tail: true
+  max_unique_ids: null
+  ddp_read_stagger_seconds: 45
+
+features:
+  stat_exog_list:
+    - nb_arrets_total
+    - position_dans_trajet
+    - est_gare_terminus
+    - temps_theorique_depuis_depart
+    - temps_theorique_jusque_arrivee
+    - temps_theorique_trajet
+    - traverse_jonction_nord_midi
+    - traverse_hub_schaerbeek
+    - traverse_hub_bruxelles_midi
+    - traverse_hub_anvers
+    - traverse_hub_gent
+    - traverse_hub_liege
+    - traverse_hub_charleroi
+    - est_hub_majeur
+    - nb_connexions_gare
+  hist_exog_list:
+    - retard_j_1
+    - retard_j_2
+    - retard_j_3
+    - retard_j_4
+    - retard_j_5
+    - retard_j_6
+    - retard_j_7
+    - retard_j_14
+    - retard_j_21
+    - retard_moyen_meme_jour_semaine
+    - lag_missing_j1
+    - lag_missing_j2
+    - lag_missing_j3
+    - lag_missing_j4
+    - lag_missing_j5
+    - lag_missing_j6
+    - lag_missing_j7
+    - lag_missing_j14
+    - lag_missing_j21
+    - lag_missing_semaine
+    - retard_moyen_ligne_7j
+    - volatilite_retard_ligne_7j
+    - taux_ponctualite_ligne_7j
+    - retard_moyen_ligne_30j
+    - retard_moyen_gare_7j
+    - retard_moyen_slot_horaire_gare_7j
+    - meteo_observee_j_1
+    - fiabilite_train_historique
+    - risque_retard_score
+    - stress_reseau_score
+    - indice_complexite
+  futr_exog_list:
+    - dt_hour
+    - heure_prevue_sin
+    - heure_prevue_cos
+    - jour_semaine_sin
+    - jour_semaine_cos
+    - mois_sin
+    - mois_cos
+    - fest_weekend
+    - is_jour_ferie
+    - is_vacances_scolaires
+    - is_heure_pointe
+    - nb_trains_prevus_ligne_heure
+    - densite_prevue_jonction_nord_midi
+    - densite_prevue_hub_schaerbeek
+    - densite_prevue_hub_bruxelles_midi
+    - densite_prevue_hub_anvers
+    - densite_prevue_hub_gent
+    - densite_prevue_hub_liege
+    - densite_prevue_hub_charleroi
+    - congestion_prevue_score
+    - travaux_nb_actifs_ligne
+    - travaux_niveau_impact
+    - travaux_distance_km
+    - travaux_actif_ligne
+    - meteo_temperature
+    - meteo_precipitations
+    - meteo_vent_vitesse
+    - meteo_nebulosite
+    - meteo_conditions_extremes
+  drop_high_cardinality_idx: true
+  allow_idx_features: []
+  id_col: group_id
+  time_col: time_idx
+  target_col: target
+  drop_columns:
+    - datetime
+    - DELAY_ARR
+    - relation_idx
+    - train_type_idx
+    - ligne_principale_idx
+    - nom_gare_idx
+    - periode_journee_idx
+    - travaux_type_impact_idx
+
+model:
+  horizon: 2
+  input_size: 84
+  hidden_size: 256
+  n_head: 8
+  dropout: 0.15
+  attn_dropout: 0.15
+  n_rnn_layers: 2
+  rnn_type: lstm
+  scaler_type: robust
+  use_exog: true
+  use_futr_exog: true
+
+train:
+  learning_rate: 0.0003
+  step_budget_mode: series
+  max_steps: -1
+  epochs: 180
+  val_size: 14
+  val_check_steps: 2000
+  early_stop_patience_steps: 12
+  num_lr_decays: 20
+  batch_size: 64
+  valid_batch_size: 24
+  windows_batch_size: 128
+  inference_windows_batch_size: 64
+  step_size: 1
+  accelerator: gpu
+  devices: 1
+  strategy: auto
+  precision: bf16-mixed
+  gradient_clip_val: 1.0
+  log_every_n_steps: 50
+  num_workers: 0
+  pin_memory: true
+  persistent_workers: false
+  enable_progress_bar: true
+  enable_checkpointing: true
+  num_sanity_val_steps: 0
+  limit_val_batches: 1.0
+  benchmark: true
+  strict_devices: true
+
+eval:
+  compute_holdout_mae: true

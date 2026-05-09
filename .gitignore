@@ -1,0 +1,35 @@
+# Data files (too large — see data/README.md for download link)
+*.parquet
+*.csv
+*.db
+
+# Model weights
+*.ckpt
+*.pkl
+lgbm_model.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+package-lock.json
+
+# Logs & temp
+*.log
+*.out
+*.tmp
+*.ipynb_checkpoints/
+
+# OS
+.DS_Store
+.DS_Store?
+
+# IDE
+.vscode/
+.idea/

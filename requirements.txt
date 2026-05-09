@@ -1,0 +1,16 @@
+# Core data
+pandas>=2.0
+numpy>=1.24
+pyarrow>=14.0
+polars>=0.20
+
+# ML
+lightgbm>=4.0
+scikit-learn>=1.3
+
+# TFT / NeuralForecast
+neuralforecast>=1.7
+torch>=2.1
+
+# Config
+pyyaml>=6.0

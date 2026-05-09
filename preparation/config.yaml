@@ -1,0 +1,56 @@
+# Paths
+source_parquet: code/output/datasets/dataset_final.parquet
+output_dir: PyTorch/data
+
+# Splits (temporal)
+train_end: "2025-02-28"   # inclusive (~80% du dataset)
+val_end: "2025-07-31"     # inclusive (~10% du dataset); test = le reste (~10%)
+
+# Columns
+# Primary target is the clipped version already in dataset_final.parquet
+# (DELAY_ARR clipped to [-20,240])
+target_col: target
+# Auxiliary: keep raw delay too if needed
+aux_target_col: DELAY_ARR
+
+# Liste des variables catégorielles (strings) à encoder au format int pour PyTorch !
+categorical_to_encode:
+  - relation
+  - train_type
+  - ligne_principale
+  - nom_gare
+  - periode_journee
+  - travaux_type_impact
+
+# Feature selection
+# If empty -> keep all columns except exclusions below
+feature_include: []
+feature_exclude:
+  - target
+  - DELAY_ARR
+  - date
+  - date_dt
+  - hist_group_id
+  - datetime
+  # Nouvelles exclusions des variables STRING originales (remplacées par leur index ex: nom_gare_idx)
+  - relation
+  - train_type
+  - ligne_principale
+  - nom_gare
+  - periode_journee
+  - travaux_type_impact
+  # Exclusion explicite demandée par l'utilisateur (géoloc) :
+  - stop_lat
+  - stop_lon
+  - longueur_trajet_km
+  # group_id et time_idx sont GARdés dans le parquet pour permettre
+  # le fenêtrage séquentiel du TFT (Time Series) dans le DataLoader.
+
+# Export
+row_group_size: 200000   # parquet row group size for downstream reads
+
+# PyTorch DataLoader & TimeSeries TFT defaults
+batch_size: 256
+num_workers: 4
+encoder_length: 14     # Historique des jours précédents à regarder
+prediction_length: 1   # Horizon de prédiction (souvent 1 avec entraînement one-step-ahead pour TFT)

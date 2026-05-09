@@ -1,0 +1,72 @@
+{
+  "model_dir": "/workspace/nixtla/runs/tft_v4_3day_36m/run_20260313_122118/model_artifacts",
+  "model_col": "TFT",
+  "horizon": 2,
+  "split_alignment": {
+    "common_train_val_series": 17333,
+    "val_is_next_step_count": 2638,
+    "val_gap_mean": 39.76316852247159,
+    "common_val_test_series": 15997,
+    "test_after_val_next_step_count": 9913,
+    "test_after_val_gap_mean": 25.61317747077577,
+    "common_train_test_series": 16720,
+    "test_after_train_next_step_count": 0,
+    "test_after_train_gap_mean": 207.30406698564593
+  },
+  "rows": {
+    "train_nf_rows": 44929090,
+    "val_nf_rows": 1494921,
+    "test_nf_rows": 1456739,
+    "train_nf_series": 68791,
+    "val_nf_series": 16597,
+    "test_nf_series": 15741
+  },
+  "metrics": {
+    "val_from_train_context": {
+      "matched_rows": 3692,
+      "finite_rows": 3692,
+      "nan_pred_rows": 0,
+      "mae": 70.86003498478404,
+      "rmse": 98.80586188242835,
+      "naive_mae": 91.62323943661971,
+      "improvement_vs_naive_pct": 22.66150441689917
+    },
+    "test_from_train_context": {
+      "matched_rows": 0,
+      "finite_rows": 0,
+      "nan_pred_rows": 0,
+      "mae": null,
+      "rmse": null,
+      "naive_mae": null,
+      "improvement_vs_naive_pct": null
+    },
+    "test_from_train_plus_val_context": {
+      "matched_rows": 19598,
+      "finite_rows": 19598,
+      "nan_pred_rows": 0,
+      "mae": 45.91256540301623,
+      "rmse": 73.07212109509912,
+      "naive_mae": 60.99168282477804,
+      "improvement_vs_naive_pct": 24.723235568171393
+    }
+  },
+  "efficiency": {
+    "elapsed_seconds": null,
+    "effective_max_steps_config": null,
+    "series_epochs_equivalent_config": null,
+    "epoch_last_seen": 74,
+    "epoch_percent_last_seen": 27,
+    "batch_progress_num_last_seen": 254,
+    "batch_progress_den_last_seen": 929,
+    "estimated_epochs_done_from_log": 74.27341227125942,
+    "estimated_steps_done_from_log": 69000,
+    "estimated_batches_per_sec": null,
+    "early_stopping_message_found": false,
+    "training_done_marker_found": false
+  },
+  "decision": {
+    "bad_quality": false,
+    "reasons": [],
+    "relaunch_recommended": false
+  }
+}
