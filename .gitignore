@@ -1,7 +1,11 @@
 # Data files (too large — see data/README.md for download link)
 *.parquet
-*.csv
 *.db
+
+# CSV data (sauf petits fichiers de référence)
+*.csv
+!dataset/data/gares.csv
+!data/sample_5rows.csv
 
 # Model weights
 *.ckpt
