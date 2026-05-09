@@ -2,7 +2,7 @@
 
 Les fichiers parquet ne sont pas inclus dans ce repo (train.parquet ≈ 2.7 Go, 45M lignes).  
 Disponibles sur demande.
-
+Le reste des fichiers sont disponibles via ce lien: https://drive.google.com/drive/folders/1Ic6Da4fEBng5jSu1m4VJykt6hsUaMb6i?usp=share_link
 ## Fichiers inclus
 
 | Fichier | Description |
