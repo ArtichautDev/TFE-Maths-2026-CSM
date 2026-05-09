@@ -10,7 +10,7 @@
 # Model weights
 *.ckpt
 *.pkl
-lgbm_model.txt
+# lgbm_model.txt  ← inclus dans results/
 
 # Python
 __pycache__/
